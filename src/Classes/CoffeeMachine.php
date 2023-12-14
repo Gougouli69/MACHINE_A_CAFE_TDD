@@ -26,6 +26,7 @@ class CoffeeMachine {
         if($this->getState() && $this->order->getIsPaid()){
             $this->coffeeServed++;
             $this->amountCashed+= $this->order->getAmount();
+            return true;
         }
         return false;
     }

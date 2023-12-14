@@ -1,0 +1,25 @@
+{
+    "name": "greg/machine_a_cafe_tdd",
+    "autoload": {
+        "psr-4": {
+            "Greg\\MachineACafeTdd\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gregory",
+            "email": "gregory.mostacci@ynov.com"
+        }
+    ],
+    "require-dev": {
+        "pestphp/pest": "^2.28"
+    },
+    "scripts": {
+        "tests" : "./vendor/bin/pest"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

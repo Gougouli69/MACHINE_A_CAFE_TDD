@@ -2,7 +2,7 @@
     "name": "greg/machine_a_cafe_tdd",
     "autoload": {
         "psr-4": {
-            "Greg\\MachineACafeTdd\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [

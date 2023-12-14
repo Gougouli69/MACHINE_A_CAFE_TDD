@@ -2,6 +2,7 @@
 
 use App\Classes\Amount;
 use App\Classes\CoffeeMachine;
+use App\Hardware\HardwareInterface;
 
 describe('Machine a café', function () {
     it("ETANT DONNE une machine à café
@@ -9,21 +10,21 @@ describe('Machine a café', function () {
     ALORS un café est servi
     ET l'argent est encaissé", function ($argentInséré) {
         // Etant donné une machine a café
+        // $hardware = new HardwareInterface();
         $machineACafe = new CoffeeMachine();
+        $argentAvant= $machineACafe->getAmountCashed();
         $machineACafe->createOrder($argentInséré);
-
-        // Quand on insère au moins le prix d'un café
-        $argentInséréEstValide = $machineACafe->isInsertedMoneyValid();
 
         // Alors un café est servi
         $caféServi = $machineACafe->coffeeServed();
 
         // Et l'argent est encaissé
-        $argentEncaissé = $machineACafe->cashedMoney();
 
+        $argentAprès = $machineACafe->getAmountCashed();
+        $deltaArgent = $argentAprès - $argentAvant;
+        
         expect($caféServi)->toBeTrue();
-        expect($argentEncaissé)->toBeTrue();
-        expect($argentInséréEstValide)->toBeTrue();
+        expect($deltaArgent)->toEqual(CoffeeMachine::COFFEE_PRICE);
     })->with([Amount::FIFTY_CENTS, Amount::ONE_EURO, Amount::TWO_EUROS]);
 
     it("ETANT DONNE une machine à café

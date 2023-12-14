@@ -4,6 +4,7 @@ namespace App\Classes;
 
 class CoffeeMachine {
 
+    const COFFEE_PRICE = 50;
     const NOTWORK_STATE = false; 
     const WORK_STATE = true;
 
@@ -11,6 +12,8 @@ class CoffeeMachine {
 
     public function __construct(
         private bool $state = self::WORK_STATE,
+        private int $coffeeServed = 0,
+        private int $amountCashed = 0
     ) {
     }
 
@@ -20,7 +23,11 @@ class CoffeeMachine {
 
     public function coffeeServed(): bool 
     {
-        return $this->getState() && $this->order->getIsPaid();
+        if($this->getState() && $this->order->getIsPaid()){
+            $this->coffeeServed++;
+            $this->amountCashed+= $this->order->getAmount();
+        }
+        return false;
     }
 
     public function cashedMoney(): bool 
@@ -48,6 +55,10 @@ class CoffeeMachine {
 
     public function getState(): bool {
         return $this->state;
+    }
+
+    public function getAmountCashed(): int {
+        return $this->amountCashed;
     }
 
 }
